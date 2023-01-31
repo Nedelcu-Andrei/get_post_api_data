@@ -1,6 +1,6 @@
 import requests
 import logging
-from typing import List, Dict
+from typing import List
 from datetime import datetime
 from decouple import config
 
@@ -8,6 +8,7 @@ from decouple import config
 class GetPostDatacose:
     def __init__(self):
         logging.basicConfig(level=logging.INFO)
+        # Using empty string default in case the first arg is not in the .env file to avoid errors
         self.user = config('API_USER', default='')
         self.passw = config('API_PASSW', default='')
         self.api_key = config('API_KEY', default='')
@@ -26,10 +27,10 @@ class GetPostDatacose:
         }
         try:
             res = requests.get(self.get_url, headers=get_headers)
-            res.raise_for_status()
-            contacts_data = res.json()
+            res.raise_for_status()  # To raise status for the exception to catch
+            contacts_data = res.json()  # Parse data as json
             for contact in contacts_data:
-                people_data.append(contact)
+                people_data.append(contact)  # Make a list of dicts to return them forward
         except requests.exceptions.HTTPError as err:
             logging.error(err)
             raise SystemExit
@@ -45,6 +46,8 @@ class GetPostDatacose:
             raise EmptyDataList(message=f"There is no data in the contact list for "
                                         f"{self.transform_contacts_data.__name__}")
         transformed_contacts = []
+
+        # Iterate through the contacts, clean the data and send them forward as the correct dict obj
         for contact in data:
             contact_obj = {
                 "first_name": contact['fields']['firstName'].strip(),
@@ -75,6 +78,8 @@ class GetPostDatacose:
             "Accept": "application/json",
             "Content-Type": "application/json"
         }
+
+        # For each contact send a post req, using basic auth and the data in a json body
         for contact in data:
             try:
                 res = requests.post(self.post_url, auth=(self.user, self.passw),

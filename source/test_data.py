@@ -3,6 +3,7 @@ from get_post_contacts import GetPostDatacose
 from datetime import datetime
 
 
+# Setup to use for each test
 @pytest.fixture(autouse=True)
 def data_input():
     cls = GetPostDatacose()
