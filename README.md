@@ -1,6 +1,6 @@
 ## Datacose API Challange
-Full_name: Nedelcu Mircea-Andrei
-mail: nedelcum.andrei@gmail.com
+- Full_name: Nedelcu Mircea-Andrei
+- mail: nedelcum.andrei@gmail.com
 
 ## Requirements
 
