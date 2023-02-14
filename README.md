@@ -1,7 +1,3 @@
-## Datacose API Challange
-- Full_name: Nedelcu Mircea-Andrei
-- mail: nedelcum.andrei@gmail.com
-
 ## Requirements
 
 - python 3.x.
