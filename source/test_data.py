@@ -1,15 +1,4 @@
-import pytest
-from get_post_contacts import GetPostDatacose
 from datetime import datetime
-
-
-# Setup to use for each test
-@pytest.fixture(autouse=True)
-def data_input():
-    cls = GetPostDatacose()
-    initial_data = cls.get_contacts_data()
-    transformed_data_ouput = cls.transform_contacts_data(initial_data)
-    return transformed_data_ouput
 
 
 def test_transform_contacts_data_correct_types(data_input):
